@@ -27,9 +27,26 @@ pub struct Equivocation {
     pub second_sig: [u8; 64],
 }
 
+#[derive(Debug, PartialEq, Encode)]
+pub struct Vote {
+    pub hash: [u8; 32],
+    pub number: u32,
+}
+
 
 fn main() {
     encode_equivocation();
+    encode_vote();
+}
+
+fn encode_vote() {
+    let block_hash: [u8; 32] = [10, 11, 12, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let vote: Vote = Vote {  
+        hash: block_hash, 
+        number: 999, 
+    };
+    let enc =  vote.encode();
+    println!("{:?}", enc);
 }
 
 fn encode_equivocation() {
